@@ -1,0 +1,186 @@
+.container {
+  height: 100vh;
+  width: 100vw;
+  margin: 0 auto;
+  position: relative;
+  font-family: "Lato", sans-serif;
+  background-color: rgb(241, 237, 237);
+}
+
+.h3 {
+  margin: 0;
+  padding-left: 60px;
+  text-transform: uppercase;
+  font-size: 30px;
+  color: #b95c04;
+}
+
+.section_auth {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  padding: 70px 0;
+  background-image: linear-gradient(
+      105deg,
+      rgba(212, 212, 212, 0.9) 0%,
+      rgba(230, 222, 222, 0.9) 55%,
+      transparent 55%
+    ),
+    url("/lecket.jpg");
+  background-size: cover;
+  background-position: center;
+  border-radius: 5px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+}
+
+.login_form {
+  width: 50%;
+  padding: 60px;
+  padding-top: 40px;
+}
+
+.form__group:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.form__input {
+  font-size: 15px;
+  font-family: inherit;
+  padding: 15px 20px;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-bottom: 3px solid transparent;
+  width: 100%;
+  display: block;
+}
+.form_check {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #fafafa;
+  border: 1px solid #cacece;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+    inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+  padding: 9px;
+  border-radius: 3px;
+  display: inline-block;
+  position: relative;
+}
+
+.form_check:active,
+.form_check:checked:active {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+    inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.form_check:checked {
+  background-color: #e9ecee;
+  border: 1px solid #adb8c0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+    inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05),
+    inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+  color: rgb(192, 165, 9);
+}
+
+.form_check:checked:after {
+  content: "\2714";
+  font-size: 14px;
+  position: absolute;
+  top: 0px;
+  left: 3px;
+  color: rgb(192, 165, 9);
+}
+
+.submit {
+  border: none;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  width: fit-content;
+  padding: 10px 15px;
+  background-image: linear-gradient(
+    to right bottom,
+    rgb(8, 168, 80),
+    rgb(3, 122, 57)
+  );
+  color: white;
+  border-radius: 5px;
+  display: inline-block;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.submit:hover {
+  background-image: linear-gradient(
+    to right top,
+    rgb(6, 143, 67),
+    rgb(5, 97, 46)
+  );
+}
+
+.form__input:focus {
+  outline: none;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border-bottom: 3px solid rgb(0, 179, 80);
+}
+
+.form__input:focus:invalid {
+  border-bottom: 3px solid #ff7730;
+}
+
+.form__input::-webkit-input-placeholder {
+  color: #999;
+}
+
+.form__input:placeholder-shown + .form__label {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-40px);
+}
+
+.form__label {
+  font-size: 14px;
+  font-weight: 700;
+  /* margin-left: 20px; */
+  margin: 7px 0;
+  display: block;
+  transition: all 0.3s;
+}
+
+.info {
+  margin-top: 40px;
+  font-size: 13px;
+  color: #999;
+}
+
+.info p {
+  padding: 6px;
+}
+
+@media (max-width: 800px) {
+  .h3 {
+    padding-left: 0;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .section_auth {
+    width: 90%;
+    background-image: linear-gradient(
+        /* 105deg, */ rgba(212, 212, 212, 0.9) 0%,
+        rgba(230, 222, 222, 0.9) 100%,
+        transparent 55%
+      ),
+      url("/lecket.jpg");
+  }
+
+  .login_form {
+    width: 100%;
+  }
+
+  .center {
+    text-align: center;
+  }
+}

@@ -1,0 +1,13 @@
+.cardlayout {
+  width: 100%;
+  position: relative;
+  margin: 10px auto !important;
+  padding: 20px;
+  display: grid;
+  grid-template-rows: 205px;
+  grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+  grid-gap: 20px;
+  grid-auto-flow: row;
+  overflow: hidden;
+  margin-bottom: 10px !important;
+}

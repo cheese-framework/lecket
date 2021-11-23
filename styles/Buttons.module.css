@@ -1,0 +1,38 @@
+.btn_primary {
+  display: inline-block !important;
+  padding: 10px 15px !important;
+  border-radius: 5px !important;
+  background-color: rgb(25, 25, 209) !important;
+  color: #fff !important;
+  margin: 5px !important;
+}
+
+.btn_primary:hover {
+  background-color: rgb(4, 4, 180) !important;
+}
+
+.btn_success {
+  display: inline-block !important;
+  padding: 10px 15px !important;
+  border-radius: 5px !important;
+  background-color: rgb(5, 146, 16) !important;
+  color: #fff !important;
+  margin: 5px !important;
+}
+
+.btn_success:hover {
+  background-color: rgb(4, 180, 4) !important;
+}
+
+.btn_danger {
+  display: inline-block !important;
+  padding: 10px 15px !important;
+  border-radius: 5px !important;
+  background-color: rgb(194, 8, 8) !important;
+  color: #fff !important;
+  margin: 5px !important;
+}
+
+.btn_danger:hover {
+  background-color: rgb(167, 4, 4) !important;
+}
