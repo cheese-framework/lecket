@@ -2,7 +2,7 @@ import $ from "jquery";
 // export const API_URL = "http://0.0.0.0.8080/http://192.168.2.181:3004";
 // export const API_URL = "http://192.168.2.118:3004";
 export const API_URL = "https://api.lecket.gm";
-export const INTERNAL_API_URL = "http://localhost:3000";
+export const INTERNAL_API_URL = "https://api.lecket.gm"; //"http://localhost:3000";
 
 export const ADMIN = "Admin::InsistBase";
 export const SUPPORT = "Admin::InsistSupport";
