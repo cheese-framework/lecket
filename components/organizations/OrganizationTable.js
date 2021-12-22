@@ -100,7 +100,7 @@ export default function OrganizationTable({ userData }) {
         })
       }
       rowCount={10}
-      search={false}
+      search={true}
       method={loadDetails}
     />
   );
