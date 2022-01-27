@@ -134,9 +134,9 @@ export default function OrganizationDetails({ organization, id, userData }) {
               <SettingsIcon style={{ fill: "#008080" }} />
             )}
           </p>
-          <Link href={`/organizations`} passHref>
-            <button className={`${styles.back} button`}>Back</button>
-          </Link>
+          {/* <Link href={`/organizations`} passHref> */}
+            <button className={`${styles.back} button`} onClick={() => useRouter.back()}>Back</button>
+          {/* </Link> */}
         </div>
         {showClearData && (
           <ClearDataCard
