@@ -1,0 +1,11 @@
+http.sslverify=false
+user.name=cheboy14
+user.email=csenghore@insistglobal.com
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=https://github.com/InSIST-Global-Ltd/lecket-ui.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.master.remote=origin
+branch.master.merge=refs/heads/master
