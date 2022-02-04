@@ -14,8 +14,18 @@ export default function UsersTable({ userData, id }) {
   const [users, setUsers] = useState([]);
 
   const columns = [
-    { title: "Name", field: "name" },
-    { title: "Email", field: "email" },
+    { 
+      title: "Name", 
+      field: "name", 
+      cellStyle: { padding: "4px" },
+      headerStyle: { padding: "4px" },
+    },
+    { 
+      title: "Email", 
+      field: "email",
+      cellStyle: { padding: "4px" },
+      headerStyle: { padding: "4px" },
+    },
     {
       title: "Last Active",
       field: "last_login_date",
@@ -23,16 +33,19 @@ export default function UsersTable({ userData, id }) {
         return timeAgo.format(new Date(rowData.last_login_date));
       },
     },
-    { title: "Status", field: "status" },
+    { 
+      title: "Status", 
+      field: "status", 
+      cellStyle: { padding: "4px" },
+      headerStyle: { padding: "4px" },
+    },
   ];
 
   const fetchUsers = async () => {
     try {
-      const res = await Axios({
-        url: `${API_URL}/organizations_v2/users`,
-        data: { organization_id: id },
-        method: "GET",
+      const response = await Axios.get(`${API_URL}/organizations_v2/users`, {
         headers: {
+          Accept: "application/json",
           Authorization: `token ${userData.auth_token}`,
           UserProfile: userData.profile,
           UserKey: userData.UserKey,
@@ -42,7 +55,8 @@ export default function UsersTable({ userData, id }) {
           organization_id: id,
         },
       });
-      setUsers(res.data);
+
+      setUsers(response.data);
     } catch (err) {
       console.log(err);
     }
