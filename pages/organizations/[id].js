@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { isLoggedIn } from "@/utils/utils";
 import { INTERNAL_API_URL } from "@/config/index";
-import useRouter from "next/router";
+import {useRouter} from "next/router";
 import Head from "next/head";
 import Link from "next/link";
 import DashboardLayout from "@/components/DashboardLayout";
@@ -19,10 +19,11 @@ import { API_URL, FINANCE } from "@/config/index";
 import LecketContext from "@/context/LecketContext";
 import ClearDataCard from "@/components/cards/ClearDataCard";
 
-export default function OrganizationDetails({ organization, id, userData }) {
+export default function OrganizationDetails({ organization, id, userData, page }) {
   const [view, setView] = useState("details");
   const [showClearData, setShowClearData] = useState(false);
   const { appTheme } = useContext(LecketContext);
+  const router = useRouter();
 
   const deleteOrganization = async () => {
     try {
@@ -48,7 +49,7 @@ export default function OrganizationDetails({ organization, id, userData }) {
           icon: "success",
           confirmButtonText: "Great!",
         });
-        useRouter.push(`/organizations`);
+        router.push(`/organizations`);
       } else {
         Swal.fire({
           title: "Error",
@@ -135,8 +136,10 @@ export default function OrganizationDetails({ organization, id, userData }) {
             )}
           </p>
           {/* <Link href={`/organizations`} passHref> */}
-            <button className={`${styles.back} button`} onClick={() => useRouter.back()}>Back</button>
-          {/* </Link> */}
+          <Link href={`/organizations?page=${page}`} passHref>
+            <button className={`${styles.back} button`}>Back</button>
+            {/* <button className={`${styles.back} button`} onClick={() => router.back()}>Back</button> */}
+          </Link>
         </div>
         {showClearData && (
           <ClearDataCard
@@ -156,9 +159,11 @@ export default function OrganizationDetails({ organization, id, userData }) {
   );
 }
 
-export async function getServerSideProps({ query: { id }, req }) {
+export async function getServerSideProps({ query: { id, che }, req }) { //lastPage, che
+  console.log("details: ",che); //lastPage ,che
   const userData = isLoggedIn(req);
   let organization = [];
+  let page = null; //null, 0
   if (userData) {
     if (userData.user_type !== FINANCE) {
       try {
@@ -169,6 +174,7 @@ export async function getServerSideProps({ query: { id }, req }) {
             id,
           }
         );
+        page = Number(che); //Number(lastPage), che
         organization = response.data;
       } catch (err) {
         console.log(err);
@@ -178,6 +184,7 @@ export async function getServerSideProps({ query: { id }, req }) {
           organization,
           userData,
           id,
+          page,
         },
       };
     } else {

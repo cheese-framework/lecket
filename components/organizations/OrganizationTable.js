@@ -3,17 +3,28 @@ import { API_URL, compileQuery } from "@/config/index";
 import { dateFormat, currencyFormat } from "@/utils/utils";
 import Axios from "axios";
 import Swal from "sweetalert2";
-import useRouter from "next/router";
-import React, {useState} from "react";
+import {useRouter} from "next/router";
+import React, {useEffect, useState} from "react";
 
 export default function OrganizationTable({ userData }) {
   const tableRef = React.createRef();
-  const [lastPage, setLastPage] = useState(0); //cookies.load("lastpage") || 
-  const [lastSort, setLastSort] = useState('');
+  const [lastPage, setLastPage] = useState(null);
+  // const [recalledPageSize, setRecalledPageSize] = useState(null);
+
+  const router = useRouter();
+  let tag = null;
+  tag = router.query.page;
+  let che = null;
 
   const loadDetails = (rowData) => {
     const id = rowData._id.$oid;
-    useRouter.push(`/organizations/${id}`);
+    router.push(`/organizations/${id}`);
+    router.push({
+        pathname: `/organizations/${id}`,
+        // query: {lastPage}
+        query: {che}
+      },
+    )
   };
 
   const loadOrganizations = (query, resolve, reject) => {
@@ -28,8 +39,11 @@ export default function OrganizationTable({ userData }) {
       filter
     );
 
-    setLastPage(query.page);
-    setLastSort(query.orderBy);
+    // setLastPage(query.page);
+    console.log("Query 1: ",query);
+    // console.log("setting page: ", lastPage);
+    che = query.page
+    console.log("che: ",che);
 
     Axios.get(url, {
       headers: {
@@ -41,27 +55,10 @@ export default function OrganizationTable({ userData }) {
       },
     })
 
-    // Axios.get(`${API_URL}/organizations_v2`, {
-    //   headers: {
-    //     Accept: "application/json",
-    //     Authorization: `token ${userData.auth_token}`,
-    //     UserProfile: userData.profile,
-    //     UserKey: userData.UserKey,
-    //     "X-Requested-With": "XMLHttpRequest",
-    //   },
-      // params: {
-      //   "from_admin": true,
-      //   "attrs": "",
-      //   "page": 1,
-      //   "size": 10,
-      //   "new_format": true,
-      //   "model": "",
-      //   // "order": [{by: "asc", attr: "created_at"}],
-      //   "query": "{_type: 'Afrijula'}",
-      //   "match": inputValue,
-      // },
-    // })
       .then((response) => {
+        console.log("Query 2: ",query);
+        console.log("==============");
+        // console.log("page response: ", query.page);
         return response.data;
       })
       .then((result) => {
@@ -120,12 +117,6 @@ export default function OrganizationTable({ userData }) {
     },
   ];
 
-  const recallPage = () => {
-    const page = lastPage;
-    setLastPage(null);
-    return page;
-  };
-
   return (
     <Table
       title="Subscribers"
@@ -133,16 +124,20 @@ export default function OrganizationTable({ userData }) {
       columnsData={columns}
       dataset={(query) =>
         new Promise((resolve, reject) => {
-          let page = recallPage();
-          if (page) {
-            query.page = page;
+          console.log("tag: ",tag);
+          if(tag) {
+            console.log("tag1: ",tag);
+            query.page = tag && Number(tag);
+            tag = null;
+            console.log("tag2: ",tag);
           }
+          // setLastPage(Number(query.page));
           loadOrganizations(query, resolve, reject);
         })
       }
       rowCount={10}
       options={{
-        pageSize: 10,
+        pageSize: 10, //: recalledPageSize || 10
         filtering: true,
         grouping: true,
 
