@@ -1,5 +1,4 @@
 import cookie from "cookie";
-import { API_URL } from "../../config/index";
 import Axios from "axios";
 
 export default async (req, res) => {
@@ -64,10 +63,7 @@ export default async (req, res) => {
         res.status(401).json({ error: "Unauthorize" });
       }
     } catch (e) {
-      if (process.env.NODE_ENV === "development") {
-        console.log(e.message);
-      }
-      res.status(500).json({ error: "Authentication error" });
+      res.status(500).json({ error: e.message || "Authentication error" });
     }
   } else {
     res.setHeader("Allow", ["POST"]);

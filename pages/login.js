@@ -70,7 +70,7 @@ const Login = ({ user }) => {
           });
         }
       } catch (e) {
-        console.log(e);
+        console.log(e.message);
         Swal.fire({
           title: "Error!",
           text: "Authentication error. Check your credentials or contact support.",
