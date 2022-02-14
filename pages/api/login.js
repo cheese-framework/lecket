@@ -7,7 +7,7 @@ export default async (req, res) => {
     const { email, password, influence, r, remember } = req.body;
     try {
       const response = await Axios.post(
-        `${API_URL}/account/authenticate_v2/authenticate`,
+        `https://api.lecket.gm/account/authenticate_v2/authenticate`,
         {
           email,
           password,
@@ -65,7 +65,7 @@ export default async (req, res) => {
       }
     } catch (e) {
       if (process.env.NODE_ENV === "development") {
-        console.log(e);
+        console.log(e.message);
       }
       res.status(500).json({ error: "Authentication error" });
     }
