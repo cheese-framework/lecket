@@ -67,7 +67,7 @@ export default async (req, res) => {
       if (process.env.NODE_ENV === "development") {
         console.log(e);
       }
-      res.status(500).json({ error: "Authentication error" });
+      res.status(200).json({ error: "Authentication error" });
     }
   } else {
     res.setHeader("Allow", ["POST"]);
