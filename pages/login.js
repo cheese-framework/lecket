@@ -7,6 +7,7 @@ import Axios from "axios";
 import cookie from "cookie";
 import Loader from "@/components/Loader";
 import styles from "@/styles/Login.module.css";
+import { API_URL } from "@/config/index";
 
 const Login = ({ user }) => {
   const [email, setEmail] = useState({
@@ -46,29 +47,33 @@ const Login = ({ user }) => {
       const r = Math.random().toString(36);
       const influence = "InSIST";
       try {
-        const res = await Axios.post("/api/login", {
-          email: email.value,
-          password: password.value,
-          influence,
+        const { data } = await Axios.post(
+          `${API_URL}/account/authenticate_v2/authenticate`,
+          {
+            email: email.value,
+            password: password.value,
+            influence,
+            r,
+          },
+          {
+            headers: {
+              UserKey: r,
+              "X-Requested-With": "XMLHttpRequest",
+            },
+          }
+        );
+        await Axios.post("/api/login", {
+          data,
           r,
           remember,
         });
-        if (res.data.success) {
-          Swal.fire({
-            title: "Success!",
-            text: "Authenticated successfully",
-            icon: "success",
-            confirmButtonText: "Great!",
-          });
-          useRouter.push("/");
-        } else {
-          Swal.fire({
-            title: "Error!",
-            text: "Authentication error",
-            icon: "error",
-            confirmButtonText: "OK",
-          });
-        }
+        Swal.fire({
+          title: "Success!",
+          text: "Authenticated successfully",
+          icon: "success",
+          confirmButtonText: "Great!",
+        });
+        useRouter.push("/");
       } catch (e) {
         console.log(e.message);
         Swal.fire({

@@ -9,17 +9,21 @@ const DashboardPage = ({ userData }) => {
   const [iframeUrl, setIframeUrl] = useState("");
 
   useEffect(() => {
-    const METABASE_SITE_URL = "https://analytics.lecket.gm";
-    const METABASE_SECRET_KEY =
-      "6eb957ffa2ebc936913f76af11032d5874274bc5a038fe83e04472106d3e4ce8";
-    const payload = {
-      resource: { dashboard: 2 },
-      params: {},
-    };
-    const token = jwt.sign(payload, METABASE_SECRET_KEY);
-    setIframeUrl(
-      `${METABASE_SITE_URL}/embed/dashboard/${token}#bordered=true&titled=false`
-    );
+    try {
+      const METABASE_SITE_URL = "https://analytics.lecket.gm";
+      const METABASE_SECRET_KEY =
+        "6eb957ffa2ebc936913f76af11032d5874274bc5a038fe83e04472106d3e4ce8";
+      const payload = {
+        resource: { dashboard: 2 },
+        params: {},
+      };
+      const token = jwt.sign(payload, METABASE_SECRET_KEY);
+      setIframeUrl(
+        `${METABASE_SITE_URL}/embed/dashboard/${token}#bordered=true&titled=false`
+      );
+    } catch (err) {
+      console.error(`___METABASE-ERROR___:${err.message}`);
+    }
   }, []);
 
   return (
