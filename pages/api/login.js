@@ -1,5 +1,5 @@
 import cookie from "cookie";
-// import { API_URL } from "../../config/index";
+import { API_URL } from "../../config/index";
 import Axios from "axios";
 
 export default async (req, res) => {
@@ -18,6 +18,12 @@ export default async (req, res) => {
           headers: {
             UserKey: r,
             "X-Requested-With": "XMLHttpRequest",
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+            "User-Agent": "axios/0.21.4",
+            "Content-Length": "95",
+            Connection: "close",
           },
         }
       );
