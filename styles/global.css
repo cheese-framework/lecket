@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -32,7 +34,11 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-family: "Poppins", sans-serif !important;
+}
+
+html {
+  font-family: "Poppins", sans-serif !important;
 }
 
 select {
@@ -241,4 +247,21 @@ select,
   100% {
     transform: rotateZ(60deg) translate(1em, -9em);
   }
+}
+
+.report-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.report-list > li {
+  padding: 10px;
+  margin: 5px 0;
+  color: rgb(91, 87, 87);
+  font-size: 14px;
+  width: 100%;
+  background-color: rgba(189, 189, 189, 0.2);
+  border-radius: 5px;
+  cursor: pointer;
 }
