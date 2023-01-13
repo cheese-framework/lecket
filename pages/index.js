@@ -3,7 +3,13 @@ import Head from "next/head";
 import { Box, Container, Grid } from "@mui/material";
 import DashboardLayout from "@/components/DashboardLayout";
 import { isLoggedIn } from "@/utils/utils";
+import { API_URL, MERCHANT_API_URL, TOKEN } from "@/config/index";
 import jwt from "jsonwebtoken";
+import Axios from "axios";
+
+import CardLayout from "@/components/container/CardLayout";
+import DetailCard from "@/components/cards/DetailCard";
+
 import CardHolder from "@/components/dashboard/cards/CardSummary";
 import TrendHolder from "@/components/dashboard/trends/TrendHolder";
 import LineChartCard from "@/components/cards/LineChartCard";
@@ -11,13 +17,120 @@ import LineChartCard from "@/components/cards/LineChartCard";
 const DashboardPage = ({ userData }) => {
   const [iframeUrl, setIframeUrl] = useState("");
 
+  const [totalWebSubs, setTotalWebSubs] = useState(0);
+  const [totalAppSubs, setTotalAppSubs] = useState(0);
+  const [totalCustomers, setTotalCustomers] = useState(0);
+  const [totalSubs, setTotalSubs] = useState(0);
+
+  const cards = [
+    <DetailCard
+      text={totalSubs}
+      value={totalSubs > 1 ? "Total Subscribers" : "Total Subscriber"}
+      key={Math.random().toString(36)}
+    />,
+    <DetailCard
+      text={totalWebSubs}
+      value={totalWebSubs > 1 ? "Web Subscribers" : "Web Subscriber"}
+      key={Math.random().toString(36)}
+    />,
+    <DetailCard
+      text={totalAppSubs}
+      value={totalAppSubs > 1 ? "App Subscribers" : "App Subscriber"}
+      key={Math.random().toString(36)}
+    />,
+    <DetailCard
+      text={totalCustomers}
+      value={totalCustomers > 1 ? "Total Customers" : "Total Customer"}
+      key={Math.random().toString(36)}
+    />,
+  ];
+
+  const loadAppSubscribers = async () => {
+    try {
+      const { data } = await Axios.get(
+        `${MERCHANT_API_URL}/merchants?limit=1`,
+        {
+          headers: {
+            Authorization: `Bearer ${TOKEN}`,
+          },
+        }
+      );
+      if (data) {
+        return data.total;
+      }
+      return 0;
+    } catch (err) {
+      return 0;
+    }
+  };
+
+  const loadCustomers = async () => {
+    try {
+      const { data } = await Axios.get(
+        `${MERCHANT_API_URL}/customers?limit=1`,
+        {
+          headers: {
+            Authorization: `Bearer ${TOKEN}`,
+          },
+        }
+      );
+      if (data) {
+        return data.total;
+      }
+      return 0;
+    } catch (err) {
+      return 0;
+    }
+  };
+
+  const loadWebSubscribers = async () => {
+    try {
+      const { data } = await Axios.get(
+        `${API_URL}/organizations_v2?from_admin=true&attrs=&page=1&size=1&new_format=true&model=&order[0][by]=asc&order[0][attr]=created_at&query={_type: 'Afrijula'}`,
+        {
+          headers: {
+            Accept: "application/json",
+            Authorization: `token ${userData.auth_token}`,
+            UserProfile: userData.profile,
+            UserKey: userData.UserKey,
+            "X-Requested-With": "XMLHttpRequest",
+          },
+        }
+      );
+
+      if (data) {
+        return data.total;
+      }
+      return 0;
+    } catch (e) {
+      return 0;
+    }
+  };
+
+  const loadSubs = async () => {
+    Promise.all([loadWebSubscribers(), loadAppSubscribers(), loadCustomers()])
+      .then((result) => {
+        setTotalSubs(result[0] + result[1]);
+        setTotalWebSubs(result[0]);
+        setTotalAppSubs(result[1]);
+        setTotalCustomers(result[2]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    loadSubs();
+  }, []);
+
   useEffect(() => {
     try {
       const METABASE_SITE_URL = "https://analytics.lecket.gm";
       const METABASE_SECRET_KEY =
         "6eb957ffa2ebc936913f76af11032d5874274bc5a038fe83e04472106d3e4ce8";
       const payload = {
-        resource: { dashboard: 2 },
+        resource: { dashboard: 3 },
         params: {},
       };
       const token = jwt.sign(payload, METABASE_SECRET_KEY);
@@ -45,7 +158,8 @@ const DashboardPage = ({ userData }) => {
           <Container maxWidth={"lg"}>
             <Grid container style={{ margin: "0 auto", width: "95vw" }}>
               <Grid item xs={12}>
-                <CardHolder />
+                <CardLayout cards={cards} />
+                {/* <CardHolder />
                 <TrendHolder />
                 <div
                   style={{
@@ -88,15 +202,15 @@ const DashboardPage = ({ userData }) => {
                       <li>Report G</li>
                     </ul>
                   </div>
-                </div>
-                {/* <iframe
+                </div> */}
+                <iframe
                   id={"dashFrame"}
                   onLoad={() => {}}
                   src={iframeUrl}
                   frameBorder="0"
                   style={{ height: "100vh", width: "95vw" }}
                   overflow="hidden"
-                ></iframe> */}
+                ></iframe>
               </Grid>
             </Grid>
           </Container>

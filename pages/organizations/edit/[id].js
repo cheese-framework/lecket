@@ -12,13 +12,10 @@ export async function getServerSideProps({ query: { id }, req }) {
   let organization = [];
   if (userData) {
     try {
-      const response = await Axios.post(
-        `${INTERNAL_API_URL}/api/organizations/get`,
-        {
-          userData,
-          id,
-        }
-      );
+      const response = await Axios.post(`/api/organizations/get`, {
+        userData,
+        id,
+      });
       organization = response.data;
     } catch (err) {
       console.log(err);

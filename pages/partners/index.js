@@ -32,7 +32,7 @@ export async function getServerSideProps({ req }) {
     const userData = JSON.parse(cookies.user);
     if (userData.user_type !== FINANCE) {
       try {
-        const response = await Axios.post(`${INTERNAL_API_URL}/api/partners`, {
+        const response = await Axios.post(`/api/partners`, {
           userData,
         });
         partners = response.data;

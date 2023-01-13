@@ -30,24 +30,21 @@ export default function EditPage({ data, id, userData }) {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await Axios.post(
-        `${INTERNAL_API_URL}/api/organizations/update`,
-        {
-          id,
-          userData,
-          data: {
-            name,
-            address,
-            contact_number: phone,
-            email,
-            website,
-            owner_gender: gender,
-            owner_age: age,
-            business_type: type,
-            lga,
-          },
-        }
-      );
+      const response = await Axios.post(`/api/organizations/update`, {
+        id,
+        userData,
+        data: {
+          name,
+          address,
+          contact_number: phone,
+          email,
+          website,
+          owner_gender: gender,
+          owner_age: age,
+          business_type: type,
+          lga,
+        },
+      });
       if (response.data) {
         Swal.fire({
           title: "Success",

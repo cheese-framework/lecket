@@ -19,13 +19,10 @@ export async function getServerSideProps({ query: { id }, req }) {
   if (userData) {
     if (userData.user_type !== FINANCE) {
       try {
-        const response = await Axios.post(
-          `${INTERNAL_API_URL}/api/partners/get`,
-          {
-            userData,
-            id,
-          }
-        );
+        const response = await Axios.post(`/api/partners/get`, {
+          userData,
+          id,
+        });
         partner = response.data;
       } catch (err) {
         console.log(err);

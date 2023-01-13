@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { isLoggedIn } from "@/utils/utils";
 import { INTERNAL_API_URL } from "@/config/index";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
 import DashboardLayout from "@/components/DashboardLayout";
@@ -19,7 +19,12 @@ import { API_URL, FINANCE } from "@/config/index";
 import LecketContext from "@/context/LecketContext";
 import ClearDataCard from "@/components/cards/ClearDataCard";
 
-export default function OrganizationDetails({ organization, id, userData, page }) {
+export default function OrganizationDetails({
+  organization,
+  id,
+  userData,
+  page,
+}) {
   const [view, setView] = useState("details");
   const [showClearData, setShowClearData] = useState(false);
   const { appTheme } = useContext(LecketContext);
@@ -159,21 +164,19 @@ export default function OrganizationDetails({ organization, id, userData, page }
   );
 }
 
-export async function getServerSideProps({ query: { id, che }, req }) { //lastPage, che
-  console.log("details: ",che); //lastPage ,che
+export async function getServerSideProps({ query: { id, che }, req }) {
+  //lastPage, che
+  console.log("details: ", che); //lastPage ,che
   const userData = isLoggedIn(req);
   let organization = [];
   let page = null; //null, 0
   if (userData) {
     if (userData.user_type !== FINANCE) {
       try {
-        const response = await Axios.post(
-          `${INTERNAL_API_URL}/api/organizations/get`,
-          {
-            userData,
-            id,
-          }
-        );
+        const response = await Axios.post(`/api/organizations/get`, {
+          userData,
+          id,
+        });
         page = Number(che); //Number(lastPage), che
         organization = response.data;
       } catch (err) {

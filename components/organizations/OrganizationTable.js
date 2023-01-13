@@ -3,8 +3,8 @@ import { API_URL, compileQuery } from "@/config/index";
 import { dateFormat, currencyFormat } from "@/utils/utils";
 import Axios from "axios";
 import Swal from "sweetalert2";
-import {useRouter} from "next/router";
-import React, {useEffect, useState} from "react";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 
 export default function OrganizationTable({ userData }) {
   const tableRef = React.createRef();
@@ -20,11 +20,10 @@ export default function OrganizationTable({ userData }) {
     const id = rowData._id.$oid;
     router.push(`/organizations/${id}`);
     router.push({
-        pathname: `/organizations/${id}`,
-        // query: {lastPage}
-        query: {che}
-      },
-    )
+      pathname: `/organizations/${id}`,
+      // query: {lastPage}
+      query: { che },
+    });
   };
 
   const loadOrganizations = (query, resolve, reject) => {
@@ -39,11 +38,7 @@ export default function OrganizationTable({ userData }) {
       filter
     );
 
-    // setLastPage(query.page);
-    console.log("Query 1: ",query);
-    // console.log("setting page: ", lastPage);
-    che = query.page
-    console.log("che: ",che);
+    che = query.page;
 
     Axios.get(url, {
       headers: {
@@ -56,9 +51,6 @@ export default function OrganizationTable({ userData }) {
     })
 
       .then((response) => {
-        console.log("Query 2: ",query);
-        console.log("==============");
-        // console.log("page response: ", query.page);
         return response.data;
       })
       .then((result) => {
@@ -124,12 +116,12 @@ export default function OrganizationTable({ userData }) {
       columnsData={columns}
       dataset={(query) =>
         new Promise((resolve, reject) => {
-          console.log("tag: ",tag);
-          if(tag) {
-            console.log("tag1: ",tag);
+          console.log("tag: ", tag);
+          if (tag) {
+            console.log("tag1: ", tag);
             query.page = tag && Number(tag);
             tag = null;
-            console.log("tag2: ",tag);
+            console.log("tag2: ", tag);
           }
           // setLastPage(Number(query.page));
           loadOrganizations(query, resolve, reject);
@@ -140,7 +132,6 @@ export default function OrganizationTable({ userData }) {
         pageSize: 10, //: recalledPageSize || 10
         filtering: true,
         grouping: true,
-
       }}
       search={true}
       method={loadDetails}

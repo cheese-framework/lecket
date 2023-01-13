@@ -33,10 +33,16 @@ export default function AddPartner({ userData }) {
     setLoading(true);
     if (name && person && email && number && access && type && status) {
       try {
-        const response = await Axios.post(
-          `${INTERNAL_API_URL}/api/partners/add`,
-          { name, person, email, number, access, type, status, userData }
-        );
+        const response = await Axios.post(`/api/partners/add`, {
+          name,
+          person,
+          email,
+          number,
+          access,
+          type,
+          status,
+          userData,
+        });
         if (response.status === 200) {
           clearForm();
           Swal.fire({

@@ -26,38 +26,35 @@ export default function EditPage({ data, id, userData, theme }) {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await Axios.post(
-        `${INTERNAL_API_URL}/api/partners/update`,
-        {
-          id,
-          userData,
-          data: {
-            name,
-            address,
-            contact_number: phone,
-            contact_email: email,
-            website,
-            partner_type: type,
-            lga,
-            access,
-            "_id[$oid]": id,
-            city: data.city,
-            contact_person: person,
-            country: data.country,
-            created_at: data.created_at,
-            district: data.district,
-            image: data.image,
-            last_activity: data.last_activity,
-            organization_type: data.organization_type,
-            picture: data.picture,
-            po_box: data.po_box,
-            server: data.server,
-            server_code: data.server_code,
-            status: data.status,
-            updated_at: data.updated_at,
-          },
-        }
-      );
+      const response = await Axios.post(`/api/partners/update`, {
+        id,
+        userData,
+        data: {
+          name,
+          address,
+          contact_number: phone,
+          contact_email: email,
+          website,
+          partner_type: type,
+          lga,
+          access,
+          "_id[$oid]": id,
+          city: data.city,
+          contact_person: person,
+          country: data.country,
+          created_at: data.created_at,
+          district: data.district,
+          image: data.image,
+          last_activity: data.last_activity,
+          organization_type: data.organization_type,
+          picture: data.picture,
+          po_box: data.po_box,
+          server: data.server,
+          server_code: data.server_code,
+          status: data.status,
+          updated_at: data.updated_at,
+        },
+      });
       if (response.data) {
         Swal.fire({
           title: "Success",

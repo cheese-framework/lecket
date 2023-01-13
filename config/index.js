@@ -1,9 +1,12 @@
 import $ from "jquery";
 // export const API_URL = "http://0.0.0.0.8080/http://192.168.2.181:3004";
 // export const API_URL = "http://192.168.2.118:3004";
-export const API_URL =
-  "https://cors-chibuike.herokuapp.com/https://api.lecket.gm";
+export const API_URL = "https://api.lecket.gm";
+export const MERCHANT_API_URL = "https://api.afrijula.gm/api";
 export const INTERNAL_API_URL = "https://lecket.vercel.app"; //window.location.hostname //"http://localhost:3000";
+
+export const TOKEN =
+  "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0MjIsInByb2ZpbGUiOnsibmFtZSI6Im11cnNoaWQgIFN5IiwicHJvZmlsZSI6ImRlbGl2ZXJ5X2FkbWluIn0sImV4cCI6MTY5OTU1MTIzMX0._ttCeQdsOGJwu9oEXvIZZcGU3eI-Dmd32ziLqRfT5Qs";
 
 export const ADMIN = "Admin::InsistBase";
 export const SUPPORT = "Admin::InsistSupport";
