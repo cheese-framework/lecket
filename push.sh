@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-sudo docker push insistglobal/lecket:lecket-app-001
+sudo docker push insistglobal/lecket:lecket-app-002

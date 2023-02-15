@@ -25,26 +25,26 @@ const adminLinks = [
     icon: BarChartIcon,
     title: "Dashboard",
   },
-  {
-    href: "/partners",
-    icon: GroupIcon,
-    title: "Partners",
-  },
-  {
-    href: "/organizations",
-    icon: AccountBalanceIcon,
-    title: "Subscribers",
-  },
-  {
-    href: "/admin/add",
-    icon: AddModeratorIcon,
-    title: "Add Admin",
-  },
-  {
-    href: "/admin/vouchers",
-    icon: PaymentIcon,
-    title: "Vouchers",
-  },
+  // {
+  //   href: "/partners",
+  //   icon: GroupIcon,
+  //   title: "Partners",
+  // },
+  // {
+  //   href: "/organizations",
+  //   icon: AccountBalanceIcon,
+  //   title: "Subscribers",
+  // },
+  // {
+  //   href: "/admin/add",
+  //   icon: AddModeratorIcon,
+  //   title: "Add Admin",
+  // },
+  // {
+  //   href: "/admin/vouchers",
+  //   icon: PaymentIcon,
+  //   title: "Vouchers",
+  // },
 ];
 
 const supportLinks = [
