@@ -43,6 +43,17 @@ const DashboardPage = ({ userData }) => {
       value={totalCustomers > 1 ? "Total Customers" : "Total Customer"}
       key={Math.random().toString(36)}
     />,
+
+    <DetailCard
+      text={2517}
+      value="Financial Literacy"
+      key={Math.random().toString(36)}
+    />,
+    <DetailCard
+      text={2369}
+      value="Digital Literacy"
+      key={Math.random().toString(36)}
+    />,
   ];
 
   const loadAppSubscribers = async () => {
