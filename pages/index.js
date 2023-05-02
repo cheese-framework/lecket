@@ -45,12 +45,12 @@ const DashboardPage = ({ userData }) => {
     />,
 
     <DetailCard
-      text={2517}
+      text={4415}
       value="Financial Literacy"
       key={Math.random().toString(36)}
     />,
     <DetailCard
-      text={2369}
+      text={3855}
       value="Digital Literacy"
       key={Math.random().toString(36)}
     />,
